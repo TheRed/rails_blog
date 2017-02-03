@@ -55,8 +55,8 @@ irb(main):006:0> Blog.select(:id, :title).left_joins(:entries).where(entries: {i
 | 2  | いぬがすき！わんわんブログ |
 +----+----------------------------+
 1 row in set
-irb(main):035:0> Blog.select(:id, :title).left_joins(entries: :comments).where(comments: { status: :unapproved })
-  Blog Load (0.3ms)  SELECT "blogs"."id", "blogs"."title" FROM "blogs" LEFT OUTER JOIN "entries" ON "entries"."blog_id" = "blogs"."id" LEFT OUTER JOIN "comments" ON "comments"."entry_id" = "entries"."id" WHERE "comments"."status" = ?  [["status", :unapproved]]
+irb(main):003:0> Blog.select(:id, :title).joins(entries: :comments).where(comments: { status: :unapproved })
+  Blog Load (0.2ms)  SELECT "blogs"."id", "blogs"."title" FROM "blogs" INNER JOIN "entries" ON "entries"."blog_id" = "blogs"."id" INNER JOIN "comments" ON "comments"."entry_id" = "entries"."id" WHERE "comments"."status" = ?  [["status", :unapproved]]
 +----+--------------------------------+
 | id | title                          |
 +----+--------------------------------+
