@@ -1,0 +1,65 @@
+irb(main):001:0> Blog.all
+  Blog Load (2.2ms)  SELECT "blogs".* FROM "blogs"
++----+--------------------------------+-------------------------+-------------------------+
+| id | title                          | created_at              | updated_at              |
++----+--------------------------------+-------------------------+-------------------------+
+| 1  | ねこがすき！にゃんにゃんブログ | 2017-02-02 19:26:46 UTC | 2017-02-02 19:26:46 UTC |
+| 2  | いぬがすき！わんわんブログ     | 2017-02-02 19:28:37 UTC | 2017-02-02 19:28:37 UTC |
+| 3  | つまがすき！いとうさんブログ   | 2017-02-02 19:28:41 UTC | 2017-02-02 19:28:41 UTC |
++----+--------------------------------+-------------------------+-------------------------+
+3 rows in set
+irb(main):002:0> Entry.all
+  Entry Load (0.2ms)  SELECT "entries".* FROM "entries"
++----+----------------------+------------------------+---------+-------------------------+-------------------------+
+| id | title                | body                   | blog_id | created_at              | updated_at              |
++----+----------------------+------------------------+---------+-------------------------+-------------------------+
+| 1  | はじめてのエントリー | はじめまして！         | 1       | 2017-02-02 19:38:46 UTC | 2017-02-02 19:38:46 UTC |
+| 2  | 2番目のエントリー    | おひさしぶりです！     | 1       | 2017-02-02 19:40:05 UTC | 2017-02-02 19:40:05 UTC |
+| 3  | 3番目のエントリー    | もうくじけました・・・ | 3       | 2017-02-02 19:41:52 UTC | 2017-02-02 19:41:52 UTC |
++----+----------------------+------------------------+---------+-------------------------+-------------------------+
+3 rows in set
+irb(main):003:0> Comment.all
+  Comment Load (0.2ms)  SELECT "comments".* FROM "comments"
++----+------------------------+------------+----------+-------------------------+-------------------------+
+| id | body                   | status     | entry_id | created_at              | updated_at              |
++----+------------------------+------------+----------+-------------------------+-------------------------+
+| 1  | てすてす               | approved   | 1        | 2017-02-02 19:46:16 UTC | 2017-02-02 19:55:05 UTC |
+| 2  | ねこはかわいいですよね | unapproved | 1        | 2017-02-02 19:50:23 UTC | 2017-02-02 19:56:06 UTC |
+| 3  | 例のいぬについて       | approved   | 2        | 2017-02-02 20:03:44 UTC | 2017-02-02 20:03:44 UTC |
+| 4  | こんにちはこんにちは！ | approved   | 3        | 2017-02-02 20:05:40 UTC | 2017-02-02 20:05:40 UTC |
++----+------------------------+------------+----------+-------------------------+-------------------------+
+4 rows in set
+irb(main):018:0> Comment.select(:id, :body, :status, :entry_id).joins(entry: :blog).where(blogs: { id: 1 })
+  Comment Load (0.3ms)  SELECT "comments"."id", "comments"."body", "comments"."status", "comments"."entry_id" FROM "comments" INNER JOIN "entries" ON "entries"."id" = "comments"."entry_id" INNER JOIN "blogs" ON "blogs"."id" = "entries"."blog_id" WHERE "blogs"."id" = ?  [["id", 1]]
++----+------------------------+------------+----------+
+| id | body                   | status     | entry_id |
++----+------------------------+------------+----------+
+| 1  | てすてす               | approved   | 1        |
+| 2  | ねこはかわいいですよね | unapproved | 1        |
+| 3  | 例のいぬについて       | approved   | 2        |
++----+------------------------+------------+----------+
+3 rows in set
+irb(main):005:0> Blog.select(:id, :title).includes(:entries).where(entries: {id: nil} )
+  SQL (0.2ms)  SELECT "blogs"."id", "blogs"."title", "blogs"."id" AS t0_r0, "blogs"."title" AS t0_r1, "blogs"."created_at" AS t0_r2, "blogs"."updated_at" AS t0_r3, "entries"."id" AS t1_r0, "entries"."title" AS t1_r1, "entries"."body" AS t1_r2, "entries"."blog_id" AS t1_r3, "entries"."created_at" AS t1_r4, "entries"."updated_at" AS t1_r5 FROM "blogs" LEFT OUTER JOIN "entries" ON "entries"."blog_id" = "blogs"."id" WHERE "entries"."id" IS NULL
++----+----------------------------+-------------------------+-------------------------+
+| id | title                      | created_at              | updated_at              |
++----+----------------------------+-------------------------+-------------------------+
+| 2  | いぬがすき！わんわんブログ | 2017-02-02 19:28:37 UTC | 2017-02-02 19:28:37 UTC |
++----+----------------------------+-------------------------+-------------------------+
+1 row in set
+irb(main):006:0> Blog.select(:id, :title).left_joins(:entries).where(entries: {id: nil} )
+  Blog Load (0.2ms)  SELECT "blogs"."id", "blogs"."title" FROM "blogs" LEFT OUTER JOIN "entries" ON "entries"."blog_id" = "blogs"."id" WHERE "entries"."id" IS NULL
++----+----------------------------+
+| id | title                      |
++----+----------------------------+
+| 2  | いぬがすき！わんわんブログ |
++----+----------------------------+
+1 row in set
+irb(main):035:0> Blog.select(:id, :title).left_joins(entries: :comments).where(comments: { status: :unapproved })
+  Blog Load (0.3ms)  SELECT "blogs"."id", "blogs"."title" FROM "blogs" LEFT OUTER JOIN "entries" ON "entries"."blog_id" = "blogs"."id" LEFT OUTER JOIN "comments" ON "comments"."entry_id" = "entries"."id" WHERE "comments"."status" = ?  [["status", :unapproved]]
++----+--------------------------------+
+| id | title                          |
++----+--------------------------------+
+| 1  | ねこがすき！にゃんにゃんブログ |
++----+--------------------------------+
+1 row in set
