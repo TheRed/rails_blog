@@ -40,6 +40,10 @@ gem 'rename', '~> 1.0.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+
+  # Use RSpec
+  gem "rspec-rails", "~> 3.5.2"
+  gem "factory_girl_rails", "~> 4.8.0"
 end
 
 group :development do
@@ -52,6 +56,15 @@ group :development do
 
   gem 'hirb'
   gem 'hirb-unicode'
+end
+
+group :test do
+  # Use RSpec
+  gem "faker", "~> 1.7.3"
+  gem "capybara", "~> 2.12.0"
+  gem "database_cleaner", "~> 1.5.3"
+  gem "launchy", "~> 2.4.3"
+  gem "selenium-webdriver", "~> 3.0.8"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
