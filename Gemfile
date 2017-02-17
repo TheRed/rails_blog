@@ -35,6 +35,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use haml
+gem 'haml-rails'
+
 gem 'rename', '~> 1.0.5'
 
 group :development, :test do
