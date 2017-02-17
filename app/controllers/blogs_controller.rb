@@ -9,12 +9,20 @@ class BlogsController < ApplicationController
   end
 
   def new
+    @blog = Blog.new
   end
 
   def edit
   end
 
   def create
+    @blog = Blog.new(blog_params)
+
+    if @blog.save
+      redirect_to @blog, notice: 'Blog was successfully created.'
+    else
+      render :new
+    end
   end
 
   def update
