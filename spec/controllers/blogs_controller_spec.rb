@@ -2,16 +2,14 @@ require 'rails_helper'
 require 'pp'
 
 describe BlogsController do
-  before :each do
-    @blogs = [create(:blog),
-              create(:blog),
-              create(:blog)]
-    pp @blogs
-  end
   describe 'GET #index' do
     it "@blogsに全てのBlogが入っていること" do
+      blogs = [create(:blog),
+               create(:blog),
+               create(:blog)]
+      pp blogs
       get :index
-      expect(assigns(:blogs)).to eq @blogs
+      expect(assigns(:blogs)).to eq blogs
     end
   end
 
