@@ -14,6 +14,9 @@ describe BlogsController do
   end
 
   describe 'POST #create' do
-    it "新規作成後に@blogのshowに遷移すること"
+    it "新規作成後に@blogのshowに遷移すること" do
+      post :create, params: { blog: attributes_for(:blog) }
+      expect(response).to redirect_to blog_path(assigns[:blog])
+    end
   end
 end
