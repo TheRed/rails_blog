@@ -12,7 +12,7 @@
     - @blogs.each do |blog|
       %tr
         %td= blog.title
-        %td Show
+        %td= link_to 'Show', blog
         %td Edit
         %td Destroy
 
