@@ -33,6 +33,10 @@ class CommentsController < ApplicationController
     redirect_to [@blog, @entry], notice: 'Comment was successfully destroyed.'
   end
 
+  def approve
+
+  end
+
   private
 
   def set_entry
