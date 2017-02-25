@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_entry, only: [:new, :create]
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy, :approve]
 
   def show; end
 
@@ -34,7 +34,8 @@ class CommentsController < ApplicationController
   end
 
   def approve
-
+    @comment.update(status: 'approved')
+    redirect_to [@blog, @entry], notice: 'Comment was successfully approved.'
   end
 
   private
