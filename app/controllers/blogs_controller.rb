@@ -5,15 +5,13 @@ class BlogsController < ApplicationController
     @blogs = Blog.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @blog = Blog.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @blog = Blog.new(blog_params)
