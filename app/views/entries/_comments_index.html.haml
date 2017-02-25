@@ -11,8 +11,6 @@
       %tr
         %td= comment.status == 'approved' ? comment.body : '(承認待ち)'
         %td= link_to 'Approve', approve_blog_entry_comment_path(@blog, @entry, comment), method: :put if comment.status != 'approved'
-        %td= link_to 'Show', blog_entry_comment_path(@blog, @entry, comment)
-        %td= link_to 'Edit', edit_blog_entry_comment_path(@blog, @entry, comment)
         %td= link_to 'Destroy', blog_entry_comment_path(@blog, @entry, comment), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br

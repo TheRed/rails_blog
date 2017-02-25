@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :blogs do
     resources :entries, except: :index do
-      resources :comments, except: :index do
+      resources :comments, only: [:create, :destroy] do
         put 'approve', on: :member
       end
     end
