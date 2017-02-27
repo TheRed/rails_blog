@@ -2,10 +2,7 @@ class EntriesController < ApplicationController
   before_action :set_blog, only: [:new, :create]
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
 
-  def show
-    @comments = @entry.comments.all
-    @new_comment = @entry.comments.build
-  end
+  def show; end
 
   def new
     @entry = @blog.entries.build

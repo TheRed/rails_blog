@@ -15,5 +15,5 @@
 
 %hr
 
-= render 'comments/index', blog: @blog, entry: @entry, comments: @comments
-= render 'comments/form', blog: @blog, entry: @entry, comment: @new_comment
+= render 'comments/index', blog: @blog, entry: @entry, comments: @entry.comments.all
+= render 'comments/form', blog: @blog, entry: @entry, comment: @entry.comments.build
