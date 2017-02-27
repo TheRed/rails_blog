@@ -8,7 +8,8 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to [@blog, @entry], notice: 'Comment was successfully created.'
     else
-      redirect_to [@blog, @entry], flash: { error: @comment.errors.full_messages }
+      @comments = @entry.comments.all
+      render 'entries/show'
     end
   end
 
