@@ -3,6 +3,7 @@ class EntriesController < ApplicationController
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
 
   def show
+    @comments = @entry.comments.all
     @comment = @entry.comments.build
   end
 
