@@ -15,6 +15,9 @@
 
 %hr
 
+%h2 Comments
 = render 'comments/index', blog: @blog, entry: @entry, comments: @entry.comments.all
 %br
+
+%h2 New Comment
 = render 'comments/form', blog: @blog, entry: @entry, comment: @comment
