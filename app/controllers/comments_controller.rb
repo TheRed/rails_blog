@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to [@blog, @entry], notice: 'Comment was successfully created.'
     else
-      render :new
+      render template: 'entries/show'
     end
   end
 
