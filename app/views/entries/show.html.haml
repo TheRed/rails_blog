@@ -16,4 +16,5 @@
 %hr
 
 = render 'comments/index', blog: @blog, entry: @entry, comments: @entry.comments.all
+%br
 = render 'comments/form', blog: @blog, entry: @entry, comment: @comment
