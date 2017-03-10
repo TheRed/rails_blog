@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CommentsController < ApplicationController
   before_action :set_entry, only: [:create]
   before_action :set_comment, only: [:destroy, :approve]
@@ -6,6 +7,7 @@ class CommentsController < ApplicationController
     @comment = @entry.comments.build(comment_params)
 
     if @comment.save
+      @mail = NoticeMailer.sendmail_confirm(@blog, @entry, @comment).deliver_later
       redirect_to [@blog, @entry], notice: 'Comment was successfully created.'
     else
       @comments = @entry.comments.all
