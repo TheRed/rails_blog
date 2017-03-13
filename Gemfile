@@ -60,6 +60,8 @@ group :development do
 
   gem 'hirb'
   gem 'hirb-unicode'
+
+  gem 'letter_opener', '~> 1.4.1'
 end
 
 group :test do

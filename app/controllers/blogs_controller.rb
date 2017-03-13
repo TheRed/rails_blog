@@ -6,14 +6,14 @@ class BlogsController < ApplicationController
   end
 
   def show
+    @entries = @blog.entries.all
   end
 
   def new
     @blog = Blog.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @blog = Blog.new(blog_params)
