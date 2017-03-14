@@ -6,7 +6,7 @@ feature 'Blog管理' do
     click_link 'New Blog'
   end
 
-  scenario 'Blogの新規作成時にtitleを入力しなかった場合にエラーが表示されること' do
+  scenario 'Blogの新規作成時にtitleを入力しなかった場合にエラーが表示されること', js: true do
     expect {
       click_button 'Create Blog'
     }.to change(Blog, :count).by(0)
@@ -15,7 +15,7 @@ feature 'Blog管理' do
     expect(page).to have_content "Title can't be blank"
   end
 
-  scenario 'Blogの新規作成時にtitleを入力した場合はデータが保存され閲覧画面に遷移すること' do
+  scenario 'Blogの新規作成時にtitleを入力した場合はデータが保存され閲覧画面に遷移すること', js: true do
     fill_in 'Title', with: 'title'
     expect {
       click_button 'Create Blog'
