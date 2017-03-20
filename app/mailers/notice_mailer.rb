@@ -5,12 +5,12 @@ class NoticeMailer < ApplicationMailer
   #
   #   en.notice_mailer.sendmail_confirm.subject
   #
-  default from: 'noreply@example.com'
+  default from: ENV['MAIL_FROM']
   def sendmail_confirm(blog, entry, comment)
     @blog = blog
     @entry = entry
     @comment = comment
 
-    mail to: 'admin@example.com', subject: '新しいコメントが投稿されました'
+    mail to: ENV['MAIL_TO'], subject: '新しいコメントが投稿されました'
   end
 end
