@@ -69,7 +69,7 @@ Rails.application.configure do
     :authentication => :plain,
     :user_name      => apikey,
     :password       => ENV['SENDGRID_API_KEY'],
-    :domain         => 'heroku.com',
+    :domain         => 'mysterious-mountain-48152.herokuapp.com',
     :enable_starttls_auto => true
   }
 
