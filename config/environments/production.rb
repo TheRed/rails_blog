@@ -64,13 +64,13 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'mysterious-mountain-48152.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => 'apikey',
-    :password       => ENV['SENDGRID_API_KEY'],
-    :domain         => 'mysterious-mountain-48152.herokuapp.com',
-    :enable_starttls_auto => true
+    address:        'smtp.sendgrid.net',
+    port:           '587',
+    authentication: :plain,
+    user_name:      'apikey',
+    password:       ENV['SENDGRID_API_KEY'],
+    domain:         'mysterious-mountain-48152.herokuapp.com',
+    enable_starttls_auto: true
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
